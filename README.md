@@ -1,14 +1,22 @@
-AI-Based Task Manager & Smart Scheduler
-Project Overview
+# AI-Based Task Manager & Smart Scheduler
 
-The AI-Based Task Manager & Smart Scheduler is an intelligent productivity system designed to assist users in efficiently managing tasks, projects, and personal goals. By leveraging artificial intelligence, the system automatically generates optimized schedules, prioritizes activities based on urgency and importance, manages deadlines, and delivers timely reminders to ensure that users remain productive and organized.
+## Project Overview
+The **AI-Based Task Manager & Smart Scheduler** is an intelligent productivity system designed to assist users in efficiently managing tasks, projects, and personal goals. By leveraging artificial intelligence, the system automatically generates optimized schedules, prioritizes activities based on urgency and importance, manages deadlines, and delivers timely reminders to ensure that users remain productive and organized.
 
-This solution is intended for students, professionals, and teams seeking an automated, data-driven approach to time management and workload planning.
+## Key Features
+- Intelligent task prioritization based on urgency, deadlines, and workload.
+- Automated daily and weekly schedule generation.
+- Smart deadline and milestone tracking.
+- Notification and reminder system for upcoming tasks.
+- Support for managing multiple projects and goals.
+- User-friendly interface for task creation and progress monitoring.
 
-#Group Details
-Member 1: Mishaal Aqdas (NUM-BSCS-2024-35)
-Member 2: Muhamad Imran (NUM-BSCS-2024-50)
-Member 3: Khadija tul Kubra (NUM-BSCS-2024-30)
+## Group Members
+| Name                | Registration Number     |
+|---------------------|-------------------------|
+| Mishaal Aqdas       | NUM-BSCS-2024-35        |
+| Muhamad Imran       | NUM-BSCS-2024-50        |
+| Khadija tul Kubra   | NUM-BSCS-2024-30        |
 
 #Meeting Minutes
 You can find meeting minute record here:
