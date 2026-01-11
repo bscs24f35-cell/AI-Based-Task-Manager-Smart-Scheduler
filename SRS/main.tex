@@ -1,0 +1,1229 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{longtable}
+
+% Page formatting
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{\thepage}
+\lhead{SRS - AI-Based Task Manager \& Smart Scheduler}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Section formatting
+\titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
+
+\begin{document}
+
+% Title Page
+\begin{titlepage}
+    \begin{center}
+        % Logo
+        \includegraphics[width=0.3\textwidth]{namal.png}
+        
+        \vspace{1cm}
+        {\LARGE \textbf{Namal University Mianwali}}
+        
+        \vspace{0.3cm}
+        
+        {\LARGE \textbf{Department of Computer Science}}\\
+        \vspace{.4cm}
+        {\Large \textbf{CSC-225 – Software Engineering}}
+        \vspace{1.5cm}
+        
+        
+        
+        {\Large \textbf{Software Requirements Specification}}
+        
+        \vspace{0.1cm}
+        
+        {\large \textbf{for}}
+        
+        \vspace{0.1cm}
+        
+        {\Large \textbf{AI-Based Task Manager \& Smart Scheduler}}
+        
+        \vspace{1.5cm}
+        
+        {\Large Version 1.0}\\
+        {\vspace{0.2cm}}
+        {\large Approved}
+        \vspace{1.5cm}
+        
+        {\large \textbf{Prepared by:}}
+        
+        \vspace{0.3cm}
+        
+        \begin{tabular}{l}
+            Mishaal Aqdas (NUM-BSCS-2024-35) \\
+            Khadija tul Kubra (NUM-BSCS-2024-30) \\
+            Muhammad Imran (NUM-BSCS-2024-50) \\
+        \end{tabular}
+        \\
+        \vspace{.5cm}
+        {\Large \textbf{Submitted to:}}\\
+        \vspace{0.1cm}
+        {\large Mam Asiya Batool}
+        \vfill
+        
+        {\Large \textbf{Date:} 28 December 2025}
+        
+    \end{center}
+\end{titlepage}
+
+% Table of Contents
+\newpage
+\tableofcontents
+\newpage
+
+% Revision History
+\section{Revision History}
+\addcontentsline{toc}{section}{Revision History}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{2cm}|p{2.5cm}|p{6cm}|p{3cm}|}
+\hline
+\textbf{Version} & \textbf{Date} & \textbf{Description} & \textbf{Author} \\
+\hline
+1.0 & 28 Dec 2025 & Initial SRS Document & Project Team \\
+\hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+% 1. INTRODUCTION
+\section{Introduction}
+
+\subsection{Purpose}
+This Software Requirements Specification (SRS) document provides a complete description of all functions and specifications of the AI-Based Task Manager \& Smart Scheduler application. This document is intended for developers, project managers, testers, users, and stakeholders involved in the development and deployment of the system.
+
+\subsection{Document Conventions}
+\begin{itemize}
+    \item Priority levels are classified as: Critical, High, Medium, and Low
+    \item Use cases are identified with unique IDs (UC-01, UC-02, etc.)
+    \item Functional requirements are labeled as FR-X
+    \item Non-functional requirements are labeled as NFR-X
+    \item Technical terms are explained in the Glossary section
+\end{itemize}
+
+\subsection{Intended Audience and Reading Suggestions}
+This document is intended for:
+\begin{itemize}
+    \item \textbf{Developers:} Should focus on Sections 3 (Specific Requirements) and 4 (System Features)
+    \item \textbf{Project Managers:} Should read all sections for complete project understanding
+    \item \textbf{Testers:} Should focus on Sections 3, 4, and 5 for test case development
+    \item \textbf{End Users:} Should read Sections 1, 2, and 4 for system understanding
+    \item \textbf{Documentation Writers:} Should read all sections
+\end{itemize}
+
+\subsection{Project Scope}
+The AI-Based Task Manager \& Smart Scheduler is a mobile application designed to help users efficiently organize and manage their daily tasks and schedules. The system addresses the common problem of task management by providing a digital platform that stores tasks, sets reminders, and uses AI to provide intelligent scheduling suggestions.
+
+\subsubsection{Key Features}
+\begin{itemize}
+    \item User authentication and account management
+    \item Task creation, editing, deletion, and completion tracking
+    \item AI-powered automatic task rescheduling
+    \item Smart suggestions based on user behavior
+    \item Multiple schedule views (daily, weekly, monthly)
+    \item Reminders/notifications
+    \item Progress tracking and productivity statistics
+    \item Data backup and restore capabilities
+\end{itemize}
+
+\subsection{References}
+\begin{itemize}
+    \item IEEE Std 830-1998: IEEE Recommended Practice for Software Requirements Specifications
+    \item Project Proposal Document - AI-Based Task Manager \& Smart Scheduler
+    \item Waterfall Software Development Model Documentation
+\end{itemize}
+
+\newpage
+
+% 2. OVERALL DESCRIPTION
+\section{Overall Description}
+
+\subsection{Product Perspective}
+The AI-Based Task Manager \& Smart Scheduler is a new, self-contained product that operates as a standalone mobile application. The system consists of the following major components:
+
+\begin{itemize}
+    \item \textbf{User Interface:} Mobile-friendly interface for task management
+    \item \textbf{Database System:} Stores user data, tasks, and schedules (Firebase/SQLite)
+    \item \textbf{AI Scheduling Module:} Provides intelligent task rescheduling and suggestions
+    \item \textbf{Notification Service:} Manages reminders and alerts
+    \item \textbf{Authentication System:} Handles user login and security
+    \item \textbf{Cloud Backup Service:} Enables data backup and restoration
+\end{itemize}
+
+\subsection{Product Functions}
+The major functions of the system include:
+
+\begin{itemize}
+    \item User registration and authentication
+    \item Task management (create, read, update, delete)
+    \item Automatic AI-based task rescheduling
+    \item Smart productivity suggestions
+    \item Multiple calendar views
+    \item Reminder and notification system
+    \item Task search functionality
+    \item Progress tracking and statistics
+    \item Data backup and restore
+\end{itemize}
+
+\subsection{User Classes and Characteristics}
+
+\subsubsection{Primary Users - Registered Users}
+\begin{itemize}
+    \item Students managing academic schedules
+    \item Professionals handling work tasks
+    \item Individuals with multiple daily responsibilities
+    \item Technical expertise: Basic to intermediate
+    \item Frequency of use: Daily, multiple times per day
+\end{itemize}
+
+\subsubsection{Secondary Users - System Administrator}
+\begin{itemize}
+    \item Manages system maintenance and updates
+    \item Handles user account issues
+    \item Monitors system performance
+    \item Technical expertise: Advanced
+    \item Frequency of use: As needed for maintenance
+\end{itemize}
+
+\subsection{Operating Environment}
+\begin{itemize}
+    \item \textbf{Client Side:} Mobile devices (Android/iOS) with modern web browsers
+    \item \textbf{Server Side:} Cloud-based server infrastructure
+    \item \textbf{Database:} Firebase or SQLite
+    \item \textbf{Network:} Internet connectivity required for synchronization and cloud features
+    \item \textbf{Operating Systems:} Compatible with Android 8.0+ and iOS 12.0+
+\end{itemize}
+
+\subsection{Design and Implementation Constraints}
+\begin{itemize}
+    \item Must comply with data protection and privacy regulations
+    \item System response time must be under 3 seconds for most operations
+    \item Must work on devices with limited storage and processing power
+    \item AI module requires sufficient computational resources
+    \item Must maintain data consistency across multiple devices
+    \item Limited by third-party API capabilities for notifications
+\end{itemize}
+
+\subsection{User Documentation}
+The following user documentation will be provided:
+\begin{itemize}
+    \item User Manual with step-by-step instructions
+    \item Quick Start Guide for new users
+    \item Video tutorials for key features
+    \item In-app help and tooltips
+    \item FAQ section for common issues
+    \item Administrator Guide for system maintenance
+\end{itemize}
+
+\subsection{Assumptions and Dependencies}
+
+\subsubsection{Assumptions}
+\begin{itemize}
+    \item Users have access to a smartphone or tablet device
+    \item Users have basic technical literacy
+    \item Internet connectivity is generally available
+    \item Users will provide valid email addresses for registration
+\end{itemize}
+
+\subsubsection{Dependencies}
+\begin{itemize}
+    \item Availability of Firebase/SQLite database services
+    \item Reliability of cloud storage providers for backups
+    \item Operating system notification APIs
+    \item Third-party authentication services (if implemented)
+    \item Internet service provider reliability
+\end{itemize}
+
+\newpage
+
+% ---------------- SECTION 3: SPECIFIC REQUIREMENTS ----------------
+\section{Specific Requirements}
+
+\subsection{Functional Requirements}
+
+% -------- FR 1 --------
+\subsubsection{User Authentication}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall provide secure user authentication mechanisms to allow users to register, log in, and log out safely.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item Email address
+\item Username
+\item Password
+\item Login credentials
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item  Validate email format and password strength
+\item  Prevent duplicate email registrations
+\item  Authenticate users with valid credentials
+\item  Handle invalid login attempts
+\item  Enable secure logout
+\item  Provide password recovery functionality
+\end{itemize}
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item Successful login/logout confirmation
+\item Error messages for invalid authentication attempts
+\end{itemize}
+
+% -------- FR 2 --------
+\subsubsection{Task Management}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall allow users to manage tasks efficiently.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item Task title
+\item Task description
+\item Deadline
+\item Priority level
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item  Create new tasks
+\item  Edit task details
+\item  Delete tasks with confirmation
+\item  Mark tasks as completed
+\item  Validate task data
+\item  Prevent past deadline entries
+\end{itemize}
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item Task saved, updated, deleted, or completed confirmation
+\end{itemize}
+
+% -------- FR 3 --------
+\subsubsection{AI-Based Task Rescheduling}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall automatically reschedule overdue tasks using AI algorithms.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item Task deadlines
+\item User availability
+\item Task priority
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item  Detect overdue tasks
+\item  Analyze available time slots
+\item  Assign new deadlines
+\item  Notify users of changes
+\end{itemize}
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item Updated task schedule
+\item Rescheduling notification
+\end{itemize}
+
+% -------- FR 4 --------
+\subsubsection{Smart Suggestions}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall provide AI-powered productivity suggestions.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item User task history
+\item Work duration
+\item Free time slots
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item  Analyze user behavior
+\item  Suggest breaks or pending tasks
+\item  Learn from user responses
+\end{itemize}
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item Productivity suggestions
+\item User notifications
+\end{itemize}
+
+% -------- FR 5 --------
+\subsubsection{Schedule Views}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall provide multiple schedule views.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item Task data
+\item Selected time range
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item  Display daily, weekly, monthly views
+\item  Filter tasks by date
+\item  Navigate between dates
+\end{itemize}
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item Visual schedule display
+\end{itemize}
+
+% -------- FR 6 --------
+\subsubsection{Reminder and Notification System}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall notify users about upcoming tasks.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item Reminder time
+\item Task deadline
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item  Schedule notifications
+\item  Send reminders
+\item  Manage permissions
+\end{itemize}
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item Reminder notifications
+\end{itemize}
+
+% -------- FR 7 --------
+\subsubsection{Search Functionality}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall provide a task search and filtering mechanism that allows users to retrieve tasks by applying filters and entering search keywords.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item Selected filter criteria (Task Name, Category, Creation Date, Due Date)
+\item Search keywords entered by the user
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item User clicks the Search option
+\item System displays available filter options
+\item User applies one or more filters
+\item User enters search keywords
+\item System scans task records based on selected filters and keywords
+\item System matches relevant tasks from the database
+\item System generates a filtered result set
+\end{itemize}
+
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item List of tasks matching the selected filters and entered keywords
+\end{itemize}
+
+% -------- FR 8 --------
+\subsubsection{Progress Tracking}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall track productivity statistics to help users monitor task completion and performance trends.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item Completed task records
+\item Pending task records
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item System retrieves completed and pending task data from the database
+\item System calculates total number of tasks
+\item System calculates the number of completed tasks
+\item System computes task completion percentage
+\item System analyzes productivity data for selected time periods (daily, weekly, monthly)
+\item System generates productivity statistics
+\item System prepares graphical data representations
+\end{itemize}
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item Completion percentage
+\item Weekly and monthly productivity charts
+\item Productivity summary report
+\end{itemize}
+
+
+% -------- FR 9 --------
+\subsubsection{Data Backup and Restore}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall support data backup and restoration.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item Task data
+\item Cloud storage credentials
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item  Encrypt data
+\item  Backup and restore data
+\end{itemize}
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item Backup confirmation
+\item Restored data
+\end{itemize}
+
+% -------- FR 10 --------
+\subsubsection{User Role Management}
+
+\paragraph{Introduction}\mbox{}\\[0.2cm]
+The system shall manage user roles.
+
+\paragraph{Inputs}
+\begin{itemize}[leftmargin=*]
+\item User role information
+\end{itemize}
+
+\paragraph{Processing}
+\begin{itemize}[leftmargin=*]
+\item  Assign roles
+\item  Restrict access
+\end{itemize}
+
+\paragraph{Outputs}
+\begin{itemize}[leftmargin=*]
+\item Role-based access control
+\end{itemize}
+
+\newpage
+\subsection{External Interface Requirements}
+
+\subsubsection{User Interfaces}
+\begin{itemize}[leftmargin=*]
+    \item The system shall provide a mobile-friendly, responsive user interface
+    \item All screens shall follow consistent design patterns and branding
+    \item The interface shall support both portrait and landscape orientations
+    \item Touch gestures (swipe, tap, long-press) shall be supported
+    \item The interface shall be accessible with support for screen readers
+    \item The system shall display clear error messages and feedback to users
+    \item Navigation shall be intuitive with a maximum of 3 clicks to reach any feature
+    \item The UI shall use appropriate color schemes for different priority levels
+    \item Loading indicators shall be displayed for operations taking more than 1 second
+\end{itemize}
+
+\subsubsection{Hardware Interfaces}
+\begin{itemize}[leftmargin=*]
+    \item The system shall interface with device notification systems (Android/iOS)
+    \item The system shall access device storage for local caching of task data
+    \item The system shall support device camera for potential photo attachments to tasks
+    \item The system shall utilize device sensors for activity detection in future versions
+    \item The system shall support biometric hardware (fingerprint/face recognition) for authentication
+    \item The system shall be compatible with various screen sizes and resolutions
+    \item Minimum hardware requirements: 2GB RAM, 100MB storage space
+\end{itemize}
+
+\subsubsection{Software Interfaces}
+\begin{itemize}[leftmargin=*]
+    \item Database Interface: Firebase Realtime Database or Cloud Firestore for data storage and retrieval
+    \item Alternative Database: SQLite for offline local storage
+    \item Cloud Storage Interface: Firebase Storage or AWS S3 for backup and restore functionality
+    \item Operating System APIs: Android API Level 26+ (Android 8.0) and iOS 12.0+
+    \item Authentication APIs: Firebase Authentication for user management
+    \item Notification APIs: Firebase Cloud Messaging (FCM) and Apple Push Notification Service (APNS)
+    \item Third-party Calendar APIs: Google Calendar API, Apple Calendar (EventKit) for integration
+    \item AI/ML Services: TensorFlow Lite or custom AI models for smart suggestions
+\end{itemize}
+
+\subsubsection{Communications Interfaces}
+\begin{itemize}[leftmargin=*]
+    \item HTTPS/TLS 1.2+ protocol for all client-server communications
+    \item RESTful API architecture for backend services
+    \item JSON format for data exchange between client and server
+    \item WebSocket connections for real-time synchronization of tasks (optional)
+    \item Push notification protocols: FCM for Android, APNS for iOS
+    \item OAuth 2.0 for third-party authentication (Google, Facebook)
+    \item Maximum API response time: 3 seconds under normal conditions
+    \item Support for offline mode with data synchronization upon reconnection
+\end{itemize}
+
+\newpage
+\subsection{Performance Requirements}
+
+\begin{enumerate}[leftmargin=*]
+    \item The system shall load the dashboard within 2-3 seconds under normal network conditions (3G or better).
+    \item Task creation, editing, and deletion operations shall complete within 1 second.
+    \item AI suggestions shall be generated and displayed within 5 seconds.
+    \item The system shall support a minimum of 10,000 concurrent users without performance degradation.
+    \item Search functionality shall return results within 2 seconds for databases containing up to 10,000 tasks per user.
+    \item The system shall handle up to 1,000 tasks per user without noticeable slowdown.
+    \item Notification delivery shall occur within 10 seconds of the scheduled reminder time.
+    \item Database queries shall be optimized to execute in less than 500ms.
+    \item The application size shall not exceed 50MB for initial download.
+    \item Memory usage shall not exceed 150MB during peak operation.
+    \item Battery consumption shall be optimized to use less than 5\% per hour of active use.
+    \item Data synchronization shall complete within 10 seconds for up to 500 tasks.
+\end{enumerate}
+
+\subsection{Design Constraints}
+
+\subsubsection{Standards Compliance}
+\begin{itemize}[leftmargin=*]
+    \item The system shall comply with IEEE 830-1998 standard for Software Requirements Specification
+    \item The system shall follow ISO/IEC 25010 software quality standards
+    \item The system shall adhere to W3C Web Content Accessibility Guidelines (WCAG) 2.1 Level AA
+    \item The system shall implement OWASP Mobile Application Security standards
+    \item The system shall comply with OAuth 2.0 standard for authentication
+    \item The system shall follow REST architectural constraints for API design
+    \item The system shall adhere to Material Design guidelines (Android) and Human Interface Guidelines (iOS)
+\end{itemize}
+
+\subsubsection{Hardware Limitations}
+\begin{itemize}[leftmargin=*]
+    \item The system must operate on devices with minimum 2GB RAM
+    \item The system must function on devices with at least 100MB available storage
+    \item The system must support screen sizes from 4.5 inches to 13 inches
+    \item The system must work on devices with ARM or x86 processor architectures
+    \item The system must be compatible with devices having various screen densities (ldpi to xxxhdpi)
+    \item Battery optimization shall be implemented to avoid excessive drain on older devices
+    \item The system shall gracefully handle devices with limited network bandwidth (2G/3G)
+\end{itemize}
+
+\subsubsection{Technology Constraints}
+\begin{itemize}[leftmargin=*]
+    \item The system shall be developed using React Native or Flutter for cross-platform compatibility
+    \item Backend services shall be implemented using Node.js or Python (Django/Flask)
+    \item Database shall be Firebase (Firestore/Realtime Database) or MongoDB
+    \item AI/ML components shall use TensorFlow Lite or PyTorch Mobile
+    \item Version control shall use Git with GitHub or GitLab
+    \item CI/CD pipeline shall be implemented using GitHub Actions or Jenkins
+\end{itemize}
+
+\subsubsection{Regulatory Constraints}
+\begin{itemize}[leftmargin=*]
+    \item The system shall comply with GDPR (General Data Protection Regulation)
+    \item The system shall comply with CCPA (California Consumer Privacy Act)
+    \item The system shall comply with COPPA for users under 13 years of age
+    \item The system shall implement proper data encryption as per industry standards
+    \item The system shall provide mechanisms for data export and deletion (right to be forgotten)
+    \item Privacy policy and terms of service must be clearly presented and accepted by users
+\end{itemize}
+
+\newpage
+\subsection{Software System Attributes}
+
+\subsubsection{Security}
+\begin{itemize}[leftmargin=*]
+    \item SEC-1: User passwords shall be hashed using bcrypt or Argon2 with salt
+    \item SEC-2: Session management shall use secure, randomly generated tokens
+    \item SEC-3: All API endpoints shall require authentication except login and signup
+    \item SEC-4: The system shall implement input validation to prevent SQL injection and XSS attacks
+    \item SEC-5: Sensitive data shall be encrypted at rest using AES-256 encryption
+    \item SEC-6: All network communications shall use TLS 1.2 or higher
+    \item SEC-7: The system shall implement rate limiting to prevent brute force attacks (max 5 failed attempts)
+    \item SEC-8: Session tokens shall expire after 30 minutes of inactivity
+    \item SEC-9: Multi-factor authentication (MFA) shall be available as an optional security feature
+    \item SEC-10: Admin functions shall require additional authentication and authorization
+    \item SEC-11: Security logs shall be maintained for all critical operations
+    \item SEC-12: The system shall comply with OWASP Mobile Top 10 security guidelines
+\end{itemize}
+
+\subsubsection{Maintainability}
+\begin{itemize}[leftmargin=*]
+    \item MAINT-1: Code shall follow consistent naming conventions and coding standards
+    \item MAINT-2: All functions and classes shall include inline documentation
+    \item MAINT-3: The system shall use modular architecture with clear separation of concerns
+    \item MAINT-4: API documentation shall be maintained using Swagger/OpenAPI specification
+    \item MAINT-5: The system shall include comprehensive unit tests with minimum 80\% code coverage
+    \item MAINT-6: Integration tests shall be implemented for critical user workflows
+    \item MAINT-7: Version control shall be used with meaningful commit messages
+    \item MAINT-8: Code reviews shall be mandatory before merging to main branch
+    \item MAINT-9: Dependency management shall use package managers (npm, pip) with locked versions
+    \item MAINT-10: The system shall support hot-fixes without requiring full redeployment
+    \item MAINT-11: Database migrations shall be version-controlled and reversible
+    \item MAINT-12: System shall include logging and monitoring capabilities for debugging
+\end{itemize}
+
+\subsubsection{Reliability}
+\begin{itemize}[leftmargin=*]
+    \item REL-1: The system shall maintain 99.5\% uptime availability
+    \item REL-2: Mean Time Between Failures (MTBF) shall be at least 720 hours
+    \item REL-3: Mean Time To Recovery (MTTR) shall not exceed 1 hour
+    \item REL-4: The system shall implement automatic failover mechanisms
+    \item REL-5: Data backups shall be performed automatically every 24 hours
+    \item REL-6: The system shall gracefully handle and recover from crashes
+    \item REL-7: Notification system shall have 99\% delivery reliability
+\end{itemize}
+
+\subsubsection{Availability}
+\begin{itemize}[leftmargin=*]
+    \item AVAIL-1: The system shall be accessible 24/7 with scheduled maintenance windows
+    \item AVAIL-2: Planned maintenance shall be scheduled during low-usage periods
+    \item AVAIL-3: Users shall be notified 48 hours in advance of scheduled maintenance
+    \item AVAIL-4: Critical services (reminders, notifications) shall remain available during non-critical maintenance
+    \item AVAIL-5: The system shall implement redundancy for critical components
+\end{itemize}
+
+\subsubsection{Portability}
+\begin{itemize}[leftmargin=*]
+    \item PORT-1: The system shall be deployable on multiple cloud platforms (AWS, Google Cloud, Azure)
+    \item PORT-2: The mobile application shall support both Android and iOS platforms
+    \item PORT-3: Data export functionality shall support JSON, CSV, and PDF formats
+    \item PORT-4: The system shall allow migration between different database systems with minimal code changes
+\end{itemize}
+
+\newpage
+\subsection{Other Requirements}
+
+\subsubsection{Database Requirements}
+\begin{itemize}[leftmargin=*]
+    \item DB-1: The database shall support ACID properties for transactional integrity
+    \item DB-2: Database schema shall include tables/collections for: Users, Tasks, Reminders, Settings, Logs
+    \item DB-3: User table shall store: user\_id, email, username, password\_hash, created\_at, updated\_at
+    \item DB-4: Task table shall store: task\_id, user\_id, title, description, deadline, priority, status, created\_at, updated\_at
+    \item DB-5: The database shall implement proper indexing on frequently queried fields (user\_id, deadline, status)
+    \item DB-6: Foreign key constraints shall be implemented to maintain referential integrity
+    \item DB-7: Database shall support full-text search capabilities for task search functionality
+    \item DB-8: Soft delete mechanism shall be implemented for tasks (with is\_deleted flag)
+    \item DB-9: Database backup retention period shall be minimum 30 days
+    \item DB-10: The system shall implement database connection pooling for optimal performance
+\end{itemize}
+
+\subsubsection{Operations Requirements}
+\begin{itemize}[leftmargin=*]
+    \item OPS-1: System administrators shall have access to monitoring dashboards
+    \item OPS-2: Real-time alerts shall be sent for system errors and performance degradation
+    \item OPS-3: The system shall generate daily operational reports including user activity, system health, and errors
+    \item OPS-4: Log files shall be rotated weekly and archived for 90 days
+    \item OPS-5: The system shall support graceful shutdown and startup procedures
+    \item OPS-6: Deployment process shall be automated using CI/CD pipelines
+    \item OPS-7: Rollback procedures shall be available for failed deployments
+    \item OPS-8: System health checks shall run every 5 minutes
+    \item OPS-9: Performance metrics (CPU, memory, network) shall be monitored continuously
+    \item OPS-10: The system shall support A/B testing for new features
+\end{itemize}
+
+\subsubsection{Site Adaptation Requirements}
+\begin{itemize}[leftmargin=*]
+    \item SITE-1: The system shall support multiple languages (English as default, with framework for additional languages)
+    \item SITE-2: Date and time formats shall adapt to user's locale settings
+    \item SITE-3: The system shall support multiple time zones for international users
+    \item SITE-4: Currency formats shall adapt based on user location (for potential premium features)
+    \item SITE-5: The system shall comply with local data protection regulations in regions where deployed
+    \item SITE-6: Content shall be adaptable for right-to-left (RTL) languages
+    \item SITE-7: The system shall support region-specific holiday calendars
+\end{itemize}
+
+\subsubsection{Documentation Requirements}
+\begin{itemize}[leftmargin=*]
+    \item DOC-1: User manual shall be provided in digital format
+    \item DOC-2: API documentation shall be comprehensive and up-to-date
+    \item DOC-3: Installation and deployment guides shall be provided for administrators
+    \item DOC-4: In-app help and tutorials shall be available for first-time users
+    \item DOC-5: FAQ section shall address common user questions
+    \item DOC-6: Technical documentation shall include system architecture diagrams
+\end{itemize}
+
+\subsubsection{Training Requirements}
+\begin{itemize}[leftmargin=*]
+    \item TRAIN-1: The system shall be intuitive enough that users can complete basic tasks without formal training
+    \item TRAIN-2: Tutorial videos shall be available for advanced features
+    \item TRAIN-3: Interactive onboarding flow shall guide new users through key features
+    \item TRAIN-4: Administrator training materials shall be provided for system management
+\end{itemize}
+
+\newpage
+\subsection{Non-Functional Requirements}
+
+\subsubsection{NFR-1: Performance Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-1.1: The system shall load the dashboard within 2-3 seconds under normal network conditions
+    \item NFR-1.2: Task creation, editing, and deletion shall occur without noticeable delay (< 1 second)
+    \item NFR-1.3: AI suggestions shall be generated in real-time or within 5 seconds
+    \item NFR-1.4: The system shall handle multiple concurrent users without performance degradation
+    \item NFR-1.5: Search results shall be displayed within 2 seconds of query input
+\end{itemize}
+
+\subsubsection{NFR-2: Security Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-2.1: User passwords must be encrypted using industry-standard hashing algorithms
+    \item NFR-2.2: Only authenticated users can access protected modules
+    \item NFR-2.3: Admin features must be accessible only to authorized administrators
+    \item NFR-2.4: The system shall protect against SQL injection and XSS attacks
+    \item NFR-2.5: Session tokens shall expire after a defined period of inactivity
+    \item NFR-2.6: Data transmission shall use HTTPS encryption
+\end{itemize}
+
+\subsubsection{NFR-3: Usability Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-3.1: The user interface shall be intuitive and user-friendly
+    \item NFR-3.2: New users shall understand basic operations without formal training
+    \item NFR-3.3: Important actions shall be easily accessible within 3 clicks
+    \item NFR-3.4: The system shall provide clear feedback messages for all operations
+    \item NFR-3.5: Error messages shall be descriptive and suggest corrective actions
+    \item NFR-3.6: The interface shall follow consistent design patterns throughout
+\end{itemize}
+
+\subsubsection{NFR-4: Reliability Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-4.1: The system shall be available 24/7 with 99.5\% uptime
+    \item NFR-4.2: User data shall not be lost during system crashes or unexpected shutdowns
+    \item NFR-4.3: Automatic backups shall be performed daily
+    \item NFR-4.4: The notification system shall deliver reminders with 99\% reliability
+    \item NFR-4.5: System failures shall not affect data integrity
+\end{itemize}
+
+\subsubsection{NFR-5: Scalability Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-5.1: The system shall support up to 10,000 concurrent users initially
+    \item NFR-5.2: The database shall efficiently handle millions of task records
+    \item NFR-5.3: The AI engine shall scale to handle growing user activity
+    \item NFR-5.4: System architecture shall support horizontal scaling
+\end{itemize}
+
+\subsubsection{NFR-6: Maintainability Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-6.1: The system shall be easy to update and modify
+    \item NFR-6.2: Code shall be well-documented with inline comments
+    \item NFR-6.3: System maintenance shall not affect active users
+    \item NFR-6.4: Updates shall not cause data loss or require migration
+    \item NFR-6.5: Bug fixes shall be deployable within 24 hours
+\end{itemize}
+
+\subsubsection{NFR-7: Compatibility Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-7.1: The application shall work on Android 8.0+ devices
+    \item NFR-7.2: The application shall work on iOS 12.0+ devices
+    \item NFR-7.3: The system shall be compatible with modern web browsers
+    \item NFR-7.4: The interface shall be responsive across different screen sizes
+    \item NFR-7.5: The system shall support integration with third-party calendar services
+\end{itemize}
+
+\subsubsection{NFR-8: Availability Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-8.1: The system shall maintain high uptime with minimal downtime
+    \item NFR-8.2: Scheduled maintenance shall be announced 48 hours in advance
+    \item NFR-8.3: Critical services (reminders, notifications) shall remain available during maintenance
+    \item NFR-8.4: System recovery time shall be less than 1 hour in case of failure
+\end{itemize}
+
+\subsubsection{NFR-9: Data Integrity Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-9.1: Task data shall remain accurate and consistent across all views
+    \item NFR-9.2: Duplicate task records shall not be created
+    \item NFR-9.3: All task updates shall be properly saved and reflected system-wide
+    \item NFR-9.4: Database transactions shall follow ACID properties
+\end{itemize}
+
+\subsubsection{NFR-10: Privacy Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-10.1: User personal data shall be kept confidential
+    \item NFR-10.2: The system shall comply with GDPR and data protection regulations
+    \item NFR-10.3: Users shall have control over their personal information
+    \item NFR-10.4: User data shall not be shared with third parties without consent
+    \item NFR-10.5: Users shall be able to export or delete their data
+\end{itemize}
+
+\subsubsection{NFR-11: AI Accuracy Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-11.1: AI suggestions shall be relevant with 80\% accuracy
+    \item NFR-11.2: The system shall continuously improve recommendations based on usage
+    \item NFR-11.3: Incorrect suggestions shall be minimized through feedback learning
+    \item NFR-11.4: AI rescheduling shall consider user preferences and patterns
+\end{itemize}
+
+\subsubsection{NFR-12: Logging and Monitoring Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-12.1: System activities and errors shall be logged for troubleshooting
+    \item NFR-12.2: Admins shall have access to real-time system performance metrics
+    \item NFR-12.3: Logs shall help identify security issues and system failures
+    \item NFR-12.4: Log retention period shall be at least 90 days
+\end{itemize}
+
+\subsubsection{NFR-13: Backup and Recovery Requirements}
+\begin{itemize}[leftmargin=*]
+    \item NFR-13.1: Database backups shall be performed automatically every 24 hours
+    \item NFR-13.2: The system shall support quick recovery in case of failure
+    \item NFR-13.3: Backup data shall be stored securely in multiple locations
+    \item NFR-13.4: Recovery time objective (RTO) shall be less than 2 hours
+    \item NFR-13.5: Recovery point objective (RPO) shall be less than 24 hours
+\end{itemize}
+
+\subsubsection{NFR-14: Response and Error Handling}
+\begin{itemize}[leftmargin=*]
+    \item NFR-14.1: The system shall display clear error messages when issues occur
+    \item NFR-14.2: Errors shall not cause complete system crashes
+    \item NFR-14.3: Users shall be guided on resolving common issues
+    \item NFR-14.4: Error messages shall not expose sensitive system information
+    \item NFR-14.5: The system shall gracefully handle network disconnections
+\end{itemize}
+\newpage
+
+% 4. USE CASES
+\section{Use Case Diagram}
+\subsection{Diagram}
+\includegraphics[width=0.8\textwidth]{use_case.png}
+    \vspace{1cm}
+\subsection{Link}
+        \href{https://www.figma.com/design/Jzr6qsU2eSbA5oKBjqp0l4/Untitled?node-id=0-1&t=oIAxnNnvi5CGsTaN-1}{Use Case Diagram Link}
+        
+\newpage
+%---Context Diagram
+
+
+\section{Context Diagram}
+\subsection{Diagram}
+\includegraphics[width=\textwidth]{context.png}
+\subsection{Link}
+        \href{https://www.figma.com/design/id1IRwOrF5cITh6tbV6cVC/Untitled?node-id=0-1&t=MSEKtpS2jPQOxPwR-1}{Context Diagram Link}
+\subsection{User to AI-Based Task Manager}
+\textbf{Source:} User \\
+\textbf{Destination:} AI-Based Task Manager \\
+\textbf{Description:} This data flow contains all information submitted by the user to interact with the system.
+
+\textbf{Data Elements:}
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Registration data (username, email, password)
+    \item Login credentials
+    \item Task details (title, description, deadline, priority)
+    \item Task update and deletion requests
+    \item Reminder and notification settings
+    \item Search keywords
+    \item Progress/statistics requests
+    \item Backup and restore requests
+\end{itemize}
+
+\subsection{AI-Based Task Manager to User}
+\textbf{Source:} AI-Based Task Manager \\
+\textbf{Destination:} User \\
+\textbf{Description:} All responses, information, and notifications provided by the system to the user.
+
+\textbf{Data Elements:}
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Task lists and schedule views
+    \item Dashboard information
+    \item Confirmation messages
+    \item Reminder notifications
+    \item AI productivity suggestions
+    \item Progress and productivity reports
+    \item Backup and restore confirmations
+\end{itemize}
+
+\subsection{AI-Based Task Manager to AI}
+\textbf{Source:} AI-Based Task Manager \\
+\textbf{Destination:} AI Module \\
+\textbf{Description:} Task and schedule data sent to the AI module for intelligent analysis and optimization.
+
+\textbf{Data Elements:}
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Pending and overdue tasks
+    \item Task priorities
+    \item User availability and free time slots
+    \item Workload statistics
+    \item Task history summaries
+\end{itemize}
+
+\subsection{AI to AI-Based Task Manager}
+\textbf{Source:} AI Module \\
+\textbf{Destination:} AI-Based Task Manager \\
+\textbf{Description:} Intelligent outputs generated by the AI module.
+
+\textbf{Data Elements:}
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Suggested time slots
+    \item Auto-rescheduling decisions
+    \item Productivity improvement suggestions
+    \item Break reminders
+    \item Optimized task sequences
+\end{itemize}
+
+\subsection{Admin to AI-Based Task Manager}
+\textbf{Source:} Admin \\
+\textbf{Destination:} AI-Based Task Manager \\
+\textbf{Description:} Commands and configuration data used by administrators to manage the system.
+
+\textbf{Data Elements:}
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Admin login credentials
+    \item User account management commands
+    \item System configuration settings
+    \item Maintenance commands
+\end{itemize}
+
+\subsection{AI-Based Task Manager to Admin}
+\textbf{Source:} AI-Based Task Manager \\
+\textbf{Destination:} Admin \\
+\textbf{Description:} Monitoring and reporting data provided to administrators.
+
+\textbf{Data Elements:}
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item User records
+    \item System usage statistics
+    \item Error and audit logs
+    \item Backup status reports
+    \item Maintenance reports
+\end{itemize}
+
+
+
+
+
+
+\newpage
+% 6. APPENDICES
+\section{Appendices}
+
+
+\subsection{Appendix A: Glossary}
+
+\begin{description}
+    \item[AI (Artificial Intelligence):] Machine learning algorithms used for task rescheduling and smart suggestions
+    \item[Authentication:] The process of verifying user identity through credentials
+    \item[Cloud Storage:] Remote data storage accessed via the internet
+    \item[Dashboard:] The main user interface showing task overview and statistics
+    \item[Deadline:] The date and time by which a task must be completed
+    \item[Firebase:] A cloud-based platform for mobile app development
+    \item[GDPR:] General Data Protection Regulation for data privacy
+    \item[Priority:] The importance level assigned to a task (High, Medium, Low)
+    \item[Rescheduling:] The process of assigning a new deadline to a task
+    \item[Session Token:] A unique identifier for authenticated user sessions
+    \item[SQLite:] A lightweight relational database system
+    \item[Stakeholder:] Any person or entity with interest in the project
+    \item[Use Case:] A description of how a user interacts with the system
+\end{description}
+
+\subsection{Appendix B: Analysis Models}
+The system interacts with the following external entities:
+\begin{itemize}
+    \item Users (primary and administrative)
+    \item Database servers
+    \item Cloud storage services
+    \item Notification services
+    \item Third-party authentication providers
+\end{itemize}
+\newpage
+
+\subsection{Appendix C: Issues List}
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{1.7cm}|p{8cm}|p{3cm}|}
+\hline
+\textbf{Issue ID} &\textbf{Description} &\textbf{Status} \\
+\hline
+I-01 & Decision on biometric authentication support & Open \\
+\hline
+I-02 & Integration with Google/Facebook login & Open \\
+\hline
+I-03 & Voice command task creation feasibility & Under Review \\
+\hline
+I-04 & Photo/document attachment to tasks & Open \\
+\hline
+I-05 & Auto-logout timeout duration & Open \\
+\hline
+I-06 & Task change history tracking requirement & Open \\
+\hline
+I-07 & Deleted tasks trash vs permanent deletion & Under Review \\
+\hline
+I-08 & Color-coding system for task priorities & Open \\
+\hline
+I-09 & Recurring tasks support & Open \\
+\hline
+I-10 & Mood tracking for AI suggestions & Future Version \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}
+
+    \item System is connected to the database
+    \item User has a valid email account
+\end{itemize} \\
+\hline
+\textbf{Trigger} & User wants to register for the first time \\
+\hline
+\textbf{Main Scenario} & 
+\begin{enumerate}[leftmargin=*,noitemsep]
+    \item User opens the app
+    \item User clicks "Sign Up"
+    \item User enters email, username, and password
+    \item System checks if email already exists
+    \item System validates password rules
+    \item System creates account and stores user data
+    \item System displays success message
+    \item System routes to Login screen
+\end{enumerate} \\
+\hline
+\textbf{Exceptions} & 
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Email already registered
+    \item Weak password
+    \item Invalid email format
+    \item No internet connection
+\end{itemize} \\
+\hline
+\textbf{Priority} & Critical \\
+\hline
+\textbf{Frequency} & One time per user \\
+\hline
+\textbf{Secondary Actors} & Database server \\
+\hline
+\textbf{Open Issues} & 
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Should phone number verification be supported?
+    \item Allow registration via Google/Facebook login?
+\end{itemize} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{UC-02: User Login}
+
+\begin{table}[h]
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Use Case ID} & UC-02 \\
+\hline
+\textbf{Use Case Name} & User Login \\
+\hline
+\textbf{Primary Actor} & Registered User \\
+\hline
+\textbf{Goal} & Authenticate user to access private tasks and schedules \\
+\hline
+\textbf{Preconditions} & 
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item User has an existing account
+    \item Email and password are stored in database
+\end{itemize} \\
+\hline
+\textbf{Trigger} & User starts the app and selects login option \\
+\hline
+\textbf{Main Scenario} & 
+\begin{enumerate}[leftmargin=*,noitemsep]
+    \item User launches application
+    \item User clicks "Login"
+    \item User enters email ID
+    \item User enters password
+    \item System validates credentials
+    \item System logs user in
+    \item User is redirected to dashboard
+\end{enumerate} \\
+\hline
+\textbf{Exceptions} & 
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Incorrect password
+    \item Incorrect email address
+    \item Forgot password
+    \item Server down
+\end{itemize} \\
+\hline
+\textbf{Priority} & Critical \\
+\hline
+\textbf{Frequency} & Multiple times daily \\
+\hline
+\textbf{Secondary Actors} & Database Server \\
+\hline
+\textbf{Open Issues} & 
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Should biometric login be provided?
+    \item Should auto-login after first login be allowed?
+\end{itemize} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{UC-03: Add Task}
+
+\begin{table}[h]
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Use Case ID} & UC-03 \\
+\hline
+\textbf{Use Case Name} & Add Task \\
+\hline
+\textbf{Primary Actor} & Registered User \\
+\hline
+\textbf{Goal} & Enable user to create a new task to be stored in their schedule \\
+\hline
+\textbf{Preconditions} & 
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item User must be logged in
+    \item Database must be accessible
+\end{itemize} \\
+\hline
+\textbf{Trigger} & User chooses to create a new task \\
+\hline
+\textbf{Main Scenario} & 
+\begin{enumerate}[leftmargin=*,noitemsep]
+    \item User opens dashboard
+    \item User clicks "Add Task"
+    \item User enters task title, description, deadline, and priority
+    \item System stores task data
+    \item System displays confirmation message
+    \item Task appears in schedule view
+\end{enumerate} \\
+\hline
+\textbf{Exceptions} & 
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Task title is missing
+    \item Deadline earlier than current date
+    \item No internet connection
+\end{itemize} \\
+\hline
+\textbf{Priority} & High \\
+\hline
+\textbf{Frequency} & Multiple times daily \\
+\hline
+\textbf{Secondary Actors} & Database, Notification services \\
+\hline
+\textbf{Open Issues} & 
+\begin{itemize}[leftmargin=*,noitemsep]
+    \item Allow voice command task creation?
+    \item Allow photo/document attachments?
+\end{itemize} \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{UC-04: Mark Task as Complete}
+
+//\begin{table}[h]
+\begin{tabular}{|p{4cm}|p{10cm}|}
+\hline
+\textbf{Use Case ID} & UC-04 \\
+\hline
+\textbf{Use Case Name} & Mark Task as Complete \\
+\hline
+\textbf{Primary Actor} & Registered User \\
+\hline
+\textbf{Goal} & Update task status when user completes it \\
+\hline
+\textbf{Preconditions} & 
+\begin{itemize} [leftmargin=*,noitemsep]
