@@ -1,0 +1,276 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}  % for resizebox
+
+
+
+
+\begin{document}
+
+
+\newpage
+
+%-------------------------------------------------
+\begin{titlepage}
+\centering
+
+% University Logo
+\vspace*{1cm}
+\includegraphics[width=0.25\textwidth]{namal.png}
+
+\vspace{1cm}
+
+% University Name
+{\Large \textbf{Namal University, Mianwali}}\\[0.3cm]
+{\large Department of Computer Science}
+
+\vspace{1.2cm}
+
+% Course Name
+{\large \textbf{Course Name:}}\\
+{\large CSC-225 – Software Engineering} % <-- change if needed
+
+\vspace{1.5cm}
+
+% Title
+{\Huge \textbf{System Design Document}}\\[0.3cm]
+{\Large AI-Based Task Manager \& Smart Scheduler}
+
+\vspace{1.5cm}
+        {\Large Version 1.0}\\
+        {\vspace{0.2cm}}
+        {\large Approved}
+        \vspace{1.5cm}
+
+% Prepared By
+{\large \textbf{Prepared By}}\\[0.4cm]
+
+\begin{tabular}{l}
+Mishaal Aqdas \hspace{1cm} (NUM-BSCS-2024-35)\\
+Muhammad Imran \hspace{0.6cm} (NUM-BSCS-2024-50)\\
+Khadija Tul Kubra \hspace{0.5cm} (NUM-BSCS-2024-30)
+\end{tabular}
+
+\vspace{1.5cm}
+
+% Submitted To
+{\large \textbf{Submitted To}}\\[0.3cm]
+{\large Mam Asiya Batool}
+
+\vfill
+
+% Date
+{\large \textbf{Date:} 18 January 2026}
+
+\end{titlepage}
+\newpage
+
+\tableofcontents
+\newpage
+\section{Introduction}
+
+The purpose of this design report is to present the system design for the \textbf{AI-Based Task Manager \& Smart Scheduler} as part of Project Milestone 3. This document translates the approved Software Requirements Specification (SRS) into a structured design that defines system behavior, constraints, and major design decisions prior to implementation. The design focuses on clarity, modularity, and feasibility to ensure smooth development and future scalability.
+
+%-------------------------------------------------
+
+\section{Design Assumptions and Constraints}
+
+\subsection{Design Assumptions}
+\begin{itemize}
+    \item Users will have access to smartphones with basic internet connectivity.
+    \item The system will be used primarily by individual users for personal task management.
+    \item AI-based scheduling decisions are based on historical task data and user preferences.
+    \item External services such as notification and calendar APIs will be available and reliable.
+\end{itemize}
+%--------------------------------------
+\subsection{Design Constraints}
+\begin{itemize}
+    \item Limited computational resources on mobile devices.
+    \item Dependency on third-party APIs for notifications and calendar integration.
+    \item Offline functionality is restricted to cached data only.
+    \item Security and privacy constraints for storing user task data.
+\end{itemize}
+
+%-------------------------------------------------
+\section{Key Design Decisions}
+
+Several key design decisions were made to ensure system efficiency and maintainability:
+\begin{itemize}
+    \item A layered architecture was selected to separate concerns and simplify maintenance.
+    \item AI logic was isolated into a dedicated layer to allow independent enhancement of intelligent features.
+    \item Modular services were used to support scalability and future feature expansion.
+    \item Cloud-based storage was chosen to enable data backup and synchronization across devices.
+\end{itemize}
+
+
+%-------------------------------------------------
+\subsection{Figma Prototyping}
+
+Figma was used to design and prototype the system diagrams, including Data Flow Diagrams (DFDs). 
+The interactive prototype helps visualize system processes and validate design decisions before implementation.
+
+\noindent
+\textbf{Prototype Link:}  \\
+\href{https://www.figma.com/design/fKUv7xkuMAmSGAMIT4smiD/Ai-based-smart-schedular?node-id=0-1&t=h985N7fXUsmoqRSM-1}{Figma System Design Prototype}
+
+%--------------------------------------------
+\section{Use Case Design Description}
+
+Use case design identifies system actors and major functionalities.  
+Registered users manage tasks, schedules, notifications, and progress.  
+System administrators manage users and monitor system operations.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{use_case.png}
+\caption{Use Case Diagram}
+\label{fig:usecase}
+\end{figure}
+\textbf{Link:}  
+\href{https://www.figma.com/design/Jzr6qsU2eSbA5oKBjqp0l4/Untitled?node-id=1-2&t=uzO61Erf4177GbQJ-1}{Use Case Diagram Link}
+\\
+\textbf{Diagram Instruction:}  
+Design a UML Use Case Diagram showing:
+\begin{itemize}
+    \item Actor: User, Admin
+    \item Use cases: Create Task, Schedule Task, Receive Reminder, AI Reschedule
+\end{itemize}
+
+%-------------------------------------------------
+
+\section{Data Flow Design Description}
+
+Data Flow Diagrams (DFDs) represent how data moves through the system.
+
+\subsection{Level 0 DFD}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{context.png}
+\caption{DFD Level 0}
+\label{fig:dfd0}
+\end{figure}
+\textbf{Link:}  
+\href{https://www.figma.com/design/Jzr6qsU2eSbA5oKBjqp0l4/Untitled?node-id=1-2&t=uzO61Erf4177GbQJ-1}{DFD 0 Diagram Link}
+\subsection{Level 1 and Level 2 DFD}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{dfd1.png}
+\caption{DFD Level 1}
+\label{fig:dfd1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{dfd2.png}
+\caption{DFD Level 2}
+\label{fig:dfd2}
+\end{figure}
+
+\textbf{Diagram Instruction:}  \\
+DFD is created using:
+\begin{itemize}
+    \item figma
+\end{itemize}
+\vspace{.1cm}
+{\large \textbf{DFD 1 and 2  Diagram Link:}}\\
+\href{https://www.figma.com/design/i1IUNTzwPR4jTwERnGFFdA/dfd?node-id=28-2&t=6xSmsDsGcxrTb0yW-1}{\texttt{Figma Design - DFD1 Diagrams}}
+%-------------------------------------------------
+\newpage
+\section{Sequence Diagram}
+
+Sequence diagrams model interactions between users, system components, databases, and external services.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{sequence1.png}
+\includegraphics[width=0.85\textwidth]{sequence2.png}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.85\textwidth]{sequence3.png}
+\includegraphics[width=0.85\textwidth]{sequence4.png}
+\caption{Sequence Diagram }
+\label{fig:sequence}
+\end{figure}
+
+\textbf{Diagram Instruction:}  
+Include lifelines for:
+\begin{itemize}
+    \item User
+    \item Mobile App
+    \item AI Engine
+    \item Database
+    \item Notification Service
+\end{itemize}
+
+%-------------------------------------------------
+\newpage
+\section{Workflow Design Description}
+
+Activity diagrams illustrate workflows such as task creation, AI rescheduling, notifications, and backup.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{activity1.jpeg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.85\textwidth]{activity2.jpeg}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[width=0.85\textwidth]{activity3.jpeg}
+\caption{Activity Diagram }
+\label{fig:activity}
+\end{figure}
+
+%-------------------------------------------------
+
+\section{Structural and Component Design Description}
+
+\subsection{Class Diagram}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{uml.png}
+\caption{Class Diagram}
+\label{fig:class}
+\end{figure}
+
+\subsection{Component Diagram}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{component.png}
+\caption{Component Diagram}
+\label{fig:component}
+\end{figure}
+{\large \textbf{Link:}}\\
+\href{https://www.figma.com/design/i1IUNTzwPR4jTwERnGFFdA/dfd?node-id=28-2&t=6xSmsDsGcxrTb0yW-1}{\texttt{Component Diagram Link}}
+%-------------------------------------------------
+\section{GitHub Link}
+
+The system design artifacts and prototypes are maintained using modern collaboration tools:
+\begin{itemize}
+    \item \textbf{GitHub} is used for version control and managing project documentation.
+\end{itemize}
+
+\noindent
+\textbf{Link:}\\
+\href{https://github.com/bscs24f35-cell/AI-Based-Task-Manager-Smart-Scheduler.git}{AI-Based Task Manager -- GitHub repository Link}
+%---------------------------------------------------------
+
+%-------------------------------------------------
+
+\section{Conclusion}
+
+This system design provides a structured blueprint for implementing the AI-Based Task Manager \& Smart Scheduler.  
+By aligning design artifacts with requirements and validating them through prototypes, the system is well-prepared for the implementation phase.
+
+\end{document}
