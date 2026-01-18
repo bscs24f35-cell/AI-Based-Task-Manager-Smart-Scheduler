@@ -5,7 +5,7 @@ This folder contains the prototype link of the **AI-Based Smart Task Manager & S
 ## Prototype Link
 
 You can view and interact with the prototype here:  
-([INSERT-YOUR-PROTOTYPE-LINK-HERE](https://www.figma.com/design/fKUv7xkuMAmSGAMIT4smiD/Ai-based-smart-schedular?node-id=0-1&t=h985N7fXUsmoqRSM-1))
+(https://www.figma.com/design/fKUv7xkuMAmSGAMIT4smiD/Ai-based-smart-schedular?node-id=0-1&t=h985N7fXUsmoqRSM-1))
 
 ## Purpose
 
